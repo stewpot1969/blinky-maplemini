@@ -23,10 +23,16 @@
 /* Define memory regions. */
 MEMORY
 {
+  rom (rx) : ORIGIN = 0x08000000, LENGTH = 0x20000 /* 128K */
+  ram (rwx) : ORIGIN = 0x20000c00, LENGTH = 0x2000 /* 8K */
+}
+/*
+MEMORY
+{
 	rom (rx) : ORIGIN = 0x08005000, LENGTH = 108K
 	ram (rwx) : ORIGIN = 0x20000c00, LENGTH = 17K
 }
-
+*/
 /* Include the common ld script. */
 INCLUDE libopencm3_stm32f1.ld
 

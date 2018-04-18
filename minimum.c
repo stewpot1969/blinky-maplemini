@@ -39,7 +39,8 @@ static void tim_setup(void)
 	 * In our case, TIM2 on APB1 is running at double frequency, so this
 	 * sets the prescaler to have the timer run at 5kHz
 	 */
-	timer_set_prescaler(TIM2, (rcc_apb1_frequency / 5000));
+	//timer_set_prescaler(TIM2, (rcc_apb1_frequency / 5000));
+	timer_set_prescaler(TIM2,1600);
 
 	/* Disable preload. */
 	timer_disable_preload(TIM2);
@@ -66,7 +67,7 @@ void tim2_isr(void)
 		timer_clear_flag(TIM2, TIM_SR_CC1IF);
 
     /* Set next interrupt time */
-		timer_set_oc_value(TIM2, TIM_OC1, timer_get_counter(TIM2) + 400 );
+		timer_set_oc_value(TIM2, TIM_OC1, timer_get_counter(TIM2) + 2500 );
 		
 		/* Toggle LED to indicate compare event. */
     gpio_toggle(GPIOB,GPIO1);
@@ -75,6 +76,8 @@ void tim2_isr(void)
 
 int main(void)
 {  
+  //rcc_clock_setup_in_hse_8mhz_out_72mhz();
+  
 	rcc_periph_clock_enable(RCC_GPIOB);
 	
 	/* PB1 (LED) output */
